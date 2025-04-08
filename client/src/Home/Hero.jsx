@@ -31,12 +31,21 @@ const Hero = () => {
             Use smart analytics to enhance efficiency, minimize waste, and
             improve your packaging workflow.
           </p>
-          <NavLink
-            to={"/package-booking"}
-            className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium text-base sm:text-lg py-3 px-6 sm:px-8 rounded-lg transition-all duration-300"
-          >
-            Get Started
-          </NavLink>
+          <div className="flex justify-center items-center">
+            <NavLink
+              to={"/package-booking"}
+              className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium text-base sm:text-lg py-3 px-6 sm:px-8 rounded-lg transition-all duration-300"
+            >
+              Get Started
+            </NavLink>
+
+            <NavLink
+              to={"/login"}
+              className="inline-block ml-3 bg-blue-600 hover:bg-blue-700 text-white font-medium text-base sm:text-lg py-3 px-6 sm:px-8 rounded-lg transition-all duration-300"
+            >
+              Login
+            </NavLink>
+          </div>
         </div>
       </div>
     </section>
