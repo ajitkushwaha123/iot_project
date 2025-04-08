@@ -37,7 +37,7 @@ const ESP32_IP = "http://192.168.43.216";
 
 arduino.get("/fetch", async (req, res) => {
   try {
-    const response = await axios.get(`${ESP32_IP}/data`);
+    const response = await axios.get(`${ESP32_IP}/trigger`);
     const { length, breadth, height, volume } = response.data;
 
     if (
