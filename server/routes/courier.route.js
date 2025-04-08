@@ -65,4 +65,96 @@ courier.get("/get-pricing", async (req, res) => {
   }
 });
 
+courier.post("/create-order", async (req, res) => {
+  const data = req.body;
+
+  try {
+    const result = await axios.post(
+      "https://apiv2.shiprocket.in/v1/external/orders/create/adhoc",
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    console.log("Shiprocket API response:", result.data);
+
+    return res.status(200).json({
+      success: true,
+      msg: "Order Created Successfully!",
+      data: result.data,
+    });
+  } catch (err) {
+    console.error("Shiprocket API Error:", err?.response?.data || err.message);
+    return res.status(500).json({
+      success: false,
+      msg: "Internal Server Error",
+    });
+  }
+});
+
+courier.get("/all-orders", async (req, res) => {
+  try {
+    const response = await axios.get(
+      "https://apiv2.shiprocket.in/v1/external/orders",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    return res.status(200).json({
+      success: true,
+      data: response.data,
+    });
+  } catch (err) {
+    console.error(err?.response?.data || err);
+    return res.status(500).json({
+      success: false,
+      msg: "Internal Server Error",
+    });
+  }
+});
+
+courier.post("/cancel-order/:id", async (req, res) => {
+  const { id } = req.params;
+
+  if (!id) {
+    return res.status(400).json({
+      success: false,
+      msg: "Order ID is required.",
+    });
+  }
+
+  try {
+    const result = await axios.post(
+      "https://apiv2.shiprocket.in/v1/external/orders/cancel",
+      { ids: [id] },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    console.log("Shiprocket API response:", result.data);
+
+    return res.status(200).json({
+      success: true,
+      msg: "Order Cancelled Successfully!",
+      data: result.data,
+    });
+  } catch (err) {
+    console.error("Shiprocket API Error:", err?.response?.data || err.message);
+    return res.status(500).json({
+      success: false,
+      msg: "Failed to cancel order.",
+    });
+  }
+});
+
+
 export default courier;

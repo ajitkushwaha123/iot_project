@@ -10,10 +10,13 @@ import {
   Truck,
   ClipboardList,
 } from "lucide-react";
+import { useNavigate } from "react-router";
 
 const Sidebar = () => {
   const [openMenu, setOpenMenu] = useState(null);
   const [activePath, setActivePath] = useState("/dashboard");
+
+  const navigate = useNavigate();
 
   const toggleMenu = (name) => {
     setOpenMenu(openMenu === name ? null : name);
@@ -21,6 +24,7 @@ const Sidebar = () => {
 
   const handleNav = (path) => {
     setActivePath(path);
+    navigate(path);
     // Add routing logic here if needed
   };
 
@@ -29,6 +33,15 @@ const Sidebar = () => {
       name: "Dashboard",
       icon: <Home className="w-5 h-5" />,
       path: "/dashboard",
+    },
+    {
+      name: "Orders",
+      icon: <Package className="w-5 h-5" />,
+      subItems: [
+        { name: "Create Order", path: "/order/create-order" },
+        { name: "All Order", path: "/order/all-orders" },
+        { name: "Cancelled Order", path: "/order/all-orders?cancelled=true" },
+      ],
     },
     {
       name: "Pickup",

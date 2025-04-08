@@ -1,5 +1,4 @@
 import React from "react";
-
 const CourierPricingList = ({ couriers }) => {
   console.log("couriers", couriers);
   if (!Array.isArray(couriers) || couriers.length === 0) return null;

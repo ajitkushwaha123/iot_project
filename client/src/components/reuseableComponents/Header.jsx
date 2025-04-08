@@ -9,10 +9,13 @@ import {
   User,
 } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 const Header = () => {
+  const navigate = useNavigate();
+
   const user = {
-    name: "John Doe",
+    name: "Ajit Kushwaha",
     avatar: null, // Use actual URL if available
   };
 
@@ -20,10 +23,13 @@ const Header = () => {
 
   return (
     <header className="w-full bg-gray-900 text-white shadow-md px-6 py-3 flex items-center justify-end">
-
       <div className="flex items-center space-x-6 relative">
-        
-        <button className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 transition px-4 py-2 rounded-lg text-sm font-medium">
+        <button
+          onClick={() => {
+            navigate("/package-booking");
+          }}
+          className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 transition px-4 py-2 rounded-lg text-sm font-medium"
+        >
           <PlusCircle className="w-5 h-5" />
           Create Pickup
         </button>

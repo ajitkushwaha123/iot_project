@@ -1,0 +1,136 @@
+{
+    "data": [
+        {
+            "id": 6597217,
+            "name": "CUSTOM",
+            "status": "Active",
+            "connection_response": null,
+            "channel_updated_at": "2025-04-07 14:02:57",
+            "status_code": 1,
+            "settings": {
+                "dimensions": "0x0x0",
+                "weight": 0,
+                "order_status": "",
+                "srf_B2B_inventry_sync": 0,
+                "return_tags_enabled": false,
+                "allow_dropship": 0
+            },
+            "auth": [],
+            "connection": 1,
+            "orders_sync": 0,
+            "inventory_sync": 0,
+            "catalog_sync": 0,
+            "orders_synced_on": "Not Available",
+            "inventory_synced_on": "Not Available",
+            "base_channel_code": "CS",
+            "base_channel": {
+                "id": 4,
+                "name": "MANUAL",
+                "code": "CS",
+                "type": "Carts",
+                "logo": "custom.png",
+                "settings_sample": {
+                    "name": "Channels Settings",
+                    "help": "",
+                    "settings": {
+                        "brand_name": {
+                            "code": "brand_name",
+                            "name": "Brand Name",
+                            "placeholder": "Your brand name",
+                            "type": "text"
+                        },
+                        "brand_logo": {
+                            "code": "brand_logo",
+                            "name": "Brand Logo",
+                            "placeholder": "Your brand logo",
+                            "type": "file"
+                        }
+                    }
+                },
+                "auth_sample": [],
+                "description": "Manual channel"
+            },
+            "catalog_synced_on": "07 Apr, 03:24 PM",
+            "order_status_mapper": 0,
+            "payment_status_mapper": 0,
+            "brand_name": "",
+            "brand_logo": "",
+            "brand_id": 0,
+            "allow_mark_as_paid": false,
+            "warehouse_locations": [],
+            "skip_unpaid_prepaid": false,
+            "vendor_id": 0,
+            "b2b_channels": [],
+            "is_b2b_channel": 0,
+            "allow_e_invoice": 0,
+            "allow_rocketbox": 0,
+            "allow_dropship": 0
+        },
+        {
+            "id": 6601796,
+            "name": "MANUAL",
+            "status": "Active",
+            "connection_response": null,
+            "channel_updated_at": "2025-04-07 14:03:19",
+            "status_code": 1,
+            "settings": {
+                "dimensions": "0x0x0",
+                "weight": 0,
+                "order_status": "",
+                "srf_B2B_inventry_sync": 0,
+                "return_tags_enabled": false,
+                "allow_dropship": 0
+            },
+            "auth": [],
+            "connection": 1,
+            "orders_sync": 1,
+            "inventory_sync": 0,
+            "catalog_sync": 0,
+            "orders_synced_on": "Not Available",
+            "inventory_synced_on": "Not Available",
+            "base_channel_code": "CS",
+            "base_channel": {
+                "id": 4,
+                "name": "MANUAL",
+                "code": "CS",
+                "type": "Carts",
+                "logo": "custom.png",
+                "settings_sample": {
+                    "name": "Channels Settings",
+                    "help": "",
+                    "settings": {
+                        "brand_name": {
+                            "code": "brand_name",
+                            "name": "Brand Name",
+                            "placeholder": "Your brand name",
+                            "type": "text"
+                        },
+                        "brand_logo": {
+                            "code": "brand_logo",
+                            "name": "Brand Logo",
+                            "placeholder": "Your brand logo",
+                            "type": "file"
+                        }
+                    }
+                },
+                "auth_sample": [],
+                "description": "Manual channel"
+            },
+            "catalog_synced_on": "07 Apr, 03:24 PM",
+            "order_status_mapper": 0,
+            "payment_status_mapper": 0,
+            "brand_name": "IOT_PROJECT",
+            "brand_logo": "",
+            "brand_id": 0,
+            "allow_mark_as_paid": false,
+            "warehouse_locations": [],
+            "skip_unpaid_prepaid": false,
+            "vendor_id": 0,
+            "b2b_channels": [],
+            "is_b2b_channel": 0,
+            "allow_e_invoice": 0,
+            "allow_rocketbox": 0,
+            "allow_dropship": 0
+        }
+    ]
+}

@@ -13,6 +13,8 @@ import RealTimeTracking from "./Pages/Booking/RealTimeTracking";
 import PriceEstimation from "./Pages/Booking/PriceEstimation";
 import PaymentIntegration from "./Pages/Booking/PaymentIntegration";
 import DeliveryPartners from "./Pages/Booking/DeliveryPartners/DeliveryPartners";
+import AllOrders from "./Pages/Order/AllOrders";
+import CreateOrder from "./Pages/Order/CreateOrder";
 
 function App() {
   return (
@@ -32,6 +34,8 @@ function App() {
           <Route path="price-estimation" element={<PriceEstimation />} />
           <Route path="payment" element={<PaymentIntegration />} />
           <Route path="delivery-partners" element={<DeliveryPartners />} />
+          <Route path="order/create-order" element={<CreateOrder />} />
+          <Route path="order/all-orders" element={<AllOrders />} />
         </Route>
       </Routes>
     </div>
