@@ -219,11 +219,25 @@ const PackageBooking = () => {
       </div>
 
       {/* Recommendations */}
-      {data.length > 0 && <CourierRecommendation couriers={data} />}
+      {data.length > 0 && (
+        <CourierRecommendation
+          couriers={data}
+          length={formik.values.length}
+          breadth={formik.values.breadth}
+          height={formik.values.height}
+          weight={formik.values.weight}
+        />
+      )}
 
       {/* Pricing List */}
       {Array.isArray(data) && data.length > 0 && (
-        <CourierPricingList couriers={data} />
+        <CourierPricingList
+          couriers={data}
+          length={formik.values.length}
+          breadth={formik.values.breadth}
+          height={formik.values.height}
+          weight={formik.values.weight}
+        />
       )}
     </div>
   );

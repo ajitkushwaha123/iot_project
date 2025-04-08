@@ -45,8 +45,9 @@ export default {
         pattern4:
           "url('https://dsathemes.com/html/soltech_1.1/files/images/hero-1.jpg')",
         bg1: "url('https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/docs-right.png')",
-        bg2: "url('https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/images/docs-left.png')",
+        bg2: "url('')",
       },
+
       keyframes: {
         scrollX: {
           "0%": { transform: "translateX(0)" },

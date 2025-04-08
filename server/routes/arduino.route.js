@@ -1,4 +1,5 @@
 import express from "express";
+import axios from "axios";
 
 const arduino = express.Router();
 
@@ -32,7 +33,7 @@ arduino.post("/data", (req, res) => {
   res.status(200).send("Data received successfully");
 });
 
-const ESP32_IP = "http://192.168.43.216"; 
+const ESP32_IP = "http://192.168.43.216";
 
 arduino.get("/fetch", async (req, res) => {
   try {

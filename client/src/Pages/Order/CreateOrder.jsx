@@ -1,38 +1,50 @@
-import React, { useState } from "react";
-import { useFormik } from "formik";
+import React, { useState, useEffect } from "react";
+import { useFormik, getIn } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import { useNavigate } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 
 const API_URL = `${import.meta.env.VITE_API_URL}/api`;
 
 const CreateOrder = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  const courierName = searchParams.get("name") || "";
+  const length = parseFloat(searchParams.get("length")) || 0;
+  const breadth = parseFloat(searchParams.get("breadth")) || 0;
+  const height = parseFloat(searchParams.get("height")) || 0;
+  const weight = parseFloat(searchParams.get("weight")) || 0;
+
+  useEffect(() => {
+    if (courierName) {
+      formik.setFieldValue("name", courierName);
+    }
+  }, [courierName]);
 
   const handleCreateOrder = async (data) => {
     try {
       setLoading(true);
       const res = await axios.post(`${API_URL}/courier/create-order`, data);
-      console.log("Order created:", res.data);
-      navigate('/order/all-orders')
+      navigate("/order/all-orders");
       return res.data;
     } catch (error) {
       console.error("Error creating order:", error);
-      throw error;
     } finally {
       setLoading(false);
     }
   };
 
   const generateOrderId = () => {
-    const randomPart = Math.floor(Math.random() * 900 + 100); 
-    const timestamp = Date.now().toString().slice(-6); 
+    const randomPart = Math.floor(Math.random() * 900 + 100);
+    const timestamp = Date.now().toString().slice(-6);
     return `${timestamp}-${randomPart}`;
   };
 
   const formik = useFormik({
     initialValues: {
+      name,
       order_id: generateOrderId(),
       order_date: new Date().toISOString().slice(0, 16),
       pickup_location: "Home",
@@ -60,11 +72,11 @@ const CreateOrder = () => {
         },
       ],
       payment_method: "Prepaid",
-      sub_total: 9000,
-      weight: 2.5,
-      length: 10,
-      breadth: 15,
-      height: 20,
+      sub_total: 900,
+      weight,
+      length,
+      breadth,
+      height,
     },
     validationSchema: Yup.object({
       order_id: Yup.string().required("Required"),
@@ -73,14 +85,9 @@ const CreateOrder = () => {
       billing_email: Yup.string().email("Invalid email").required("Required"),
       billing_phone: Yup.string().required("Required"),
     }),
+    // enableReinitialize: true,
     onSubmit: async (values) => {
-      try {
-        const result = await handleCreateOrder(values);
-        console.log("result", result);
-      
-      } catch (err) {
-        console.error("Failed to submit form:", err);
-      }
+      await handleCreateOrder(values);
     },
   });
 
@@ -89,15 +96,9 @@ const CreateOrder = () => {
   const labelStyle = "text-sm text-gray-300 mb-1 block";
 
   const renderInput = (name, label, type = "text") => {
-    const value = name.includes("[")
-      ? getIn(formik.values, name)
-      : formik.values[name];
-    const touched = name.includes("[")
-      ? getIn(formik.touched, name)
-      : formik.touched[name];
-    const error = name.includes("[")
-      ? getIn(formik.errors, name)
-      : formik.errors[name];
+    const value = getIn(formik.values, name);
+    const touched = getIn(formik.touched, name);
+    const error = getIn(formik.errors, name);
 
     return (
       <div>
@@ -121,16 +122,9 @@ const CreateOrder = () => {
     );
   };
 
-  const getIn = (obj, key) => {
-    return key
-      .replace(/\[(\w+)\]/g, ".$1")
-      .split(".")
-      .reduce((acc, k) => (acc ? acc[k] : undefined), obj);
-  };
-
   const renderOrderItems = () => (
     <div className="space-y-6">
-      {formik.values.order_items?.map((_, index) => (
+      {formik.values.order_items.map((_, index) => (
         <div
           key={index}
           className="grid grid-cols-1 md:grid-cols-3 gap-4 rounded-lg"
@@ -148,26 +142,28 @@ const CreateOrder = () => {
           {renderInput(`order_items[${index}].hsn`, "HSN Code", "number")}
         </div>
       ))}
-      <button
-        type="button"
-        onClick={() =>
-          formik.setFieldValue("order_items", [
-            ...formik.values.order_items,
-            {
-              name: "Ninja Headband",
-              sku: "NHB-001",
-              units: 2,
-              selling_price: 450,
-              discount: 50,
-              tax: 18,
-              hsn: "6117",
-            },
-          ])
-        }
-        className="mt-2 text-sm bg-green-600 px-4 py-2 rounded hover:bg-green-700"
-      >
-        + Add Another Item
-      </button>
+      <div className="text-right">
+        <button
+          type="button"
+          onClick={() =>
+            formik.setFieldValue("order_items", [
+              ...formik.values.order_items,
+              {
+                name: "Ninja Headband",
+                sku: "NHB-001",
+                units: 1,
+                selling_price: 450,
+                discount: 0,
+                tax: 18,
+                hsn: "6117",
+              },
+            ])
+          }
+          className="mt-2 text-sm bg-green-600 px-4 py-2 rounded hover:bg-green-700"
+        >
+          + Add Another Item
+        </button>
+      </div>
     </div>
   );
 
@@ -183,8 +179,6 @@ const CreateOrder = () => {
         onSubmit={formik.handleSubmit}
         className="space-y-10 max-w-5xl mx-auto"
       >
-        {/* <h1 className="text-3xl font-bold text-center mb-10">Create Order</h1> */}
-
         {section("Order Info")}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {renderInput("order_id", "Order ID")}
@@ -231,9 +225,13 @@ const CreateOrder = () => {
           {renderInput("payment_method", "Payment Method")}
           {renderInput("sub_total", "Subtotal", "number")}
           {renderInput("weight", "Weight (kg)", "number")}
-          {renderInput("length", "Length", "number")}
-          {renderInput("breadth", "Breadth", "number")}
-          {renderInput("height", "Height", "number")}
+          {renderInput("length", "Length (cm)", "number")}
+          {renderInput("breadth", "Breadth (cm)", "number")}
+          {renderInput("height", "Height (cm)", "number")}
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-1 gap-6">
+          {renderInput("name", "Courier Provider", "text")}
         </div>
 
         <div className="text-center pt-6">

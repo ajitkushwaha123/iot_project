@@ -30,9 +30,9 @@ const Sidebar = () => {
 
   const menuItems = [
     {
-      name: "Dashboard",
+      name: "Home",
       icon: <Home className="w-5 h-5" />,
-      path: "/dashboard",
+      path: "/",
     },
     {
       name: "Orders",
@@ -52,29 +52,19 @@ const Sidebar = () => {
         { name: "Pickup Tracking", path: "/pickup/tracking" },
       ],
     },
-    {
-      name: "Orders",
-      icon: <ClipboardList className="w-5 h-5" />,
-      subItems: [
-        { name: "All Orders", path: "/orders/all" },
-        { name: "Pending Orders", path: "/orders/pending" },
-        { name: "Delivered Orders", path: "/orders/delivered" },
-      ],
-    },
-    {
-      name: "Billing",
-      icon: <CreditCard className="w-5 h-5" />,
-      subItems: [
-        { name: "Invoices", path: "/billing/invoices" },
-        { name: "Transactions", path: "/billing/transactions" },
-      ],
-    },
+    // {
+    //   name: "Billing",
+    //   icon: <CreditCard className="w-5 h-5" />,
+    //   subItems: [
+    //     { name: "Invoices", path: "/billing/invoices" },
+    //     { name: "Transactions", path: "/billing/transactions" },
+    //   ],
+    // },
     {
       name: "Delivery Partners",
       icon: <Truck className="w-5 h-5" />,
       subItems: [
         { name: "Manage Partners", path: "/partners/manage" },
-        { name: "Partner Requests", path: "/partners/requests" },
       ],
     },
     {
@@ -82,11 +72,11 @@ const Sidebar = () => {
       icon: <User className="w-5 h-5" />,
       path: "/profile",
     },
-    {
-      name: "Settings",
-      icon: <Settings className="w-5 h-5" />,
-      path: "/settings",
-    },
+    // {
+    //   name: "Settings",
+    //   icon: <Settings className="w-5 h-5" />,
+    //   path: "/settings",
+    // },
   ];
 
   return (

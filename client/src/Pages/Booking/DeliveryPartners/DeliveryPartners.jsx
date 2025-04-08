@@ -36,14 +36,14 @@ const DeliveryPartners = () => {
       <h2 className="text-2xl font-semibold text-white mb-6">
         🚚 Delivery Partners
       </h2>
-      <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+      <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3">
         {partners.map((partner, index) => (
           <div
             key={index}
             className="bg-[#1e1e2f] rounded-2xl shadow-xl p-5 flex flex-col gap-3 hover:shadow-2xl transition-all border border-[#2a2a3d]"
           >
             <h3 className="text-lg font-bold text-white flex items-center gap-2">
-              <Truck size={18} className="text-violet-400" />
+              <Truck size={22} className="text-violet-400" />
               {partner?.name}
             </h3>
 

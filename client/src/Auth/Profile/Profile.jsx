@@ -2,19 +2,19 @@ import { Pencil, UserCircle } from "lucide-react";
 
 const Profile = () => {
   const user = {
-    name: "John Doe",
-    username: "john_doe_99",
-    email: "john@example.com",
-    phone: "+1 234 567 890",
+    name: "Ajit Kushwaha",
+    username: "ajitkushwaha3101",
+    email: "ajitkushwahacse@gmail.com",
+    phone: "+91 8178739633",
     address: "123 Main Street, New York, USA",
-    joined: "Jan 2023",
-    deliveries: 124,
+    joined: "Mar 2025",
+    deliveries: 10,
     accountType: "Premium",
     avatar: null, // Replace with image URL if available
   };
 
   return (
-    <div className="min-h-[92vh] bg-gray-700 py-12 px-4">
+    <div className="min-h-[92vh] py-12 px-4">
       <div className="max-w-6xl mx-auto bg-gradient-to-br from-gray-900 to-gray-800 text-white rounded-2xl shadow-2xl p-8">
         {/* Header */}
         <div className="flex items-center justify-between border-b border-gray-700 pb-4 mb-6">
