@@ -23,6 +23,7 @@ app.use(
         "https://auth-ivory-omega.vercel.app",
         "https://zomato.magicscale.in",
         "https://auth.magicscale.in",
+        "iot-project-self.vercel.app",
       ];
       if (
         allowedDomains.some((pattern) =>

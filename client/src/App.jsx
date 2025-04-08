@@ -26,7 +26,7 @@ function App() {
           <Route path="reset-password" element={<ForgetPassword />} />
         </Route>
 
-        <Route element={<DashboardLayout />}>
+        <Route path="/" element={<DashboardLayout />}>
           <Route path="profile" element={<Profile />} />
           <Route path="package-booking" element={<PackageBooking />} />
           <Route path="pricing" element={<AutoMeasurement />} />
