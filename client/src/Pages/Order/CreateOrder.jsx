@@ -11,17 +11,13 @@ const CreateOrder = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
-  const courierName = searchParams.get("name") || "";
+  const courierName = searchParams.get("courier") || "Xpressbees Surface 2kg";
   const length = parseFloat(searchParams.get("length")) || 0;
   const breadth = parseFloat(searchParams.get("breadth")) || 0;
   const height = parseFloat(searchParams.get("height")) || 0;
   const weight = parseFloat(searchParams.get("weight")) || 0;
 
-  useEffect(() => {
-    if (courierName) {
-      formik.setFieldValue("name", courierName);
-    }
-  }, [courierName]);
+  console.log("courier_name", courierName);
 
   const handleCreateOrder = async (data) => {
     try {
@@ -44,7 +40,7 @@ const CreateOrder = () => {
 
   const formik = useFormik({
     initialValues: {
-      name,
+      courierName,
       order_id: generateOrderId(),
       order_date: new Date().toISOString().slice(0, 16),
       pickup_location: "Home",
@@ -231,7 +227,7 @@ const CreateOrder = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-1 gap-6">
-          {renderInput("name", "Courier Provider", "text")}
+          {renderInput("courierName", "Courier Provider")}
         </div>
 
         <div className="text-center pt-6">
