@@ -33,7 +33,8 @@ arduino.post("/data", (req, res) => {
   res.status(200).send("Data received successfully");
 });
 
-const ESP32_IP = "https://2282-2401-4900-446e-8783-599f-9f38-d3b3-68e7.ngrok-free.app";
+const ESP32_IP =
+  "https://de1d-2401-4900-446e-8783-1c92-41dd-5ab1-5edd.ngrok-free.app";
 
 arduino.get("/fetch", async (req, res) => {
   try {

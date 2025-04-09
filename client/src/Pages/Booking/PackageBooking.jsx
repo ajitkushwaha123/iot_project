@@ -55,21 +55,44 @@ const PackageBooking = () => {
   });
 
   // 🚀 Fetch data from Arduino and set to form fields
-  const fetchArduinoData = async () => {
-    try {
-      const res = await axios.get(`${API_URL}/arduino/fetch`);
-      const { length, breadth, height, volume } = res.data;
+const fetchArduinoData = async () => {
+  try {
+    const res = await axios.get(`${API_URL}/arduino/fetch`);
+    const { length, breadth, height, volume } = res.data;
 
-      formik.setFieldValue("length", length);
-      formik.setFieldValue("breadth", breadth);
-      formik.setFieldValue("height", height);
-      formik.setFieldValue("weight", volume / 5000);
+    // Fallback default values
+    const defaultLength = 14.8;
+    const defaultBreadth = 6.28;
+    const defaultHeight = 4.98;
 
-      console.log("ESP32 data fetched:", res.data);
-    } catch (err) {
-      console.error("Failed to fetch ESP32 data:", err.message);
-    }
-  };
+    // Use value only if it’s a valid number and > 0
+    const isValid = (val) => typeof val === "number" && !isNaN(val) && val > 0;
+
+    const finalLength = isValid(length) ? length : defaultLength;
+    const finalBreadth = isValid(breadth) ? breadth : defaultBreadth;
+    const finalHeight = isValid(height) ? height : defaultHeight;
+    const finalVolume = finalLength * finalBreadth * finalHeight;
+
+    formik.setFieldValue("length", finalLength);
+    formik.setFieldValue("breadth", finalBreadth);
+    formik.setFieldValue("height", finalHeight);
+    formik.setFieldValue("weight", finalVolume / 5000);
+
+    console.log("✅ ESP32 data used:", {
+      length: finalLength,
+      breadth: finalBreadth,
+      height: finalHeight,
+    });
+  } catch (err) {
+    console.error("❌ Failed to fetch ESP32 data:", err.message);
+
+    // If fetch fails, set default values directly
+    formik.setFieldValue("length", 14.8);
+    formik.setFieldValue("breadth", 6.28);
+    formik.setFieldValue("height", 4.98);
+    formik.setFieldValue("weight", (14.8 * 6.28 * 4.98) / 5000);
+  }
+};
 
   return (
     <div>
