@@ -7,6 +7,7 @@ import {
   PackageCheck,
   ClipboardList,
   User,
+  Wallet,
 } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
@@ -36,6 +37,16 @@ const Header = () => {
 
         <button className="hover:text-gray-300">
           <Bell className="w-5 h-5" />
+        </button>
+
+        <button
+          onClick={() => {
+            // navigate("/wallet");
+          }}
+          className="flex items-center gap-2 bg-green-600 hover:bg-green-700 transition px-4 py-2 rounded-lg text-sm font-medium"
+        >
+          <Wallet className="w-5 h-5" />
+          ₹ 0
         </button>
 
         <div className="relative">

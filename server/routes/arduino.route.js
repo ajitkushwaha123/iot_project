@@ -33,27 +33,48 @@ arduino.post("/data", (req, res) => {
   res.status(200).send("Data received successfully");
 });
 
-const ESP32_IP =
-  "https://de1d-2401-4900-446e-8783-1c92-41dd-5ab1-5edd.ngrok-free.app";
+const ESP32_IP = "https://bf85-139-5-240-78.ngrok-free.app";
 
 arduino.get("/fetch", async (req, res) => {
   try {
-    const response = await axios.get(`${ESP32_IP}/trigger`);
+    const response = await axios.get(`${ESP32_IP}/measure`, {
+      timeout: 5000, // ⏳ Timeout after 5 seconds
+    });
+
     const { length, breadth, height, volume } = response.data;
 
+    // ✅ Validate data
     if (
       typeof length !== "number" ||
       typeof breadth !== "number" ||
       typeof height !== "number" ||
       typeof volume !== "number"
     ) {
-      return res.status(400).send("Invalid data from ESP32");
+      console.warn("⚠️ Invalid data from ESP32, using fallback values.");
+      return res.status(200).json({
+        length: 14.8,
+        breadth: 6.28,
+        height: 4.98,
+        volume: 14.8 * 6.28 * 4.98,
+        isFallback: true,
+      });
     }
 
-    res.status(200).json({ length, breadth, height, volume });
+    // ✅ Send actual response
+    res
+      .status(200)
+      .json({ length, breadth, height, volume, isFallback: false });
   } catch (err) {
-    console.error("Error fetching ESP32 data:", err.message);
-    res.status(500).send("Failed to fetch data from ESP32");
+    console.error("❌ Error or timeout fetching ESP32 data:", err.message);
+
+    // ⛑️ Return fallback if ESP32 is not reachable in 5s
+    return res.status(200).json({
+      length: 14.8,
+      breadth: 6.28,
+      height: 4.98,
+      volume: 14.8 * 6.28 * 4.98,
+      isFallback: true,
+    });
   }
 });
 
