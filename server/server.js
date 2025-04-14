@@ -24,6 +24,7 @@ app.use(
         "https://zomato.magicscale.in",
         "https://auth.magicscale.in",
         "https://iot-project-self.vercel.app",
+        "https://packlytics.vercel.app",
       ];
       if (
         allowedDomains.some((pattern) =>
