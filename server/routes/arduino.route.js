@@ -15,11 +15,11 @@ arduino.get("/data", (req, res) => {
 });
 
 arduino.post("/data", (req, res) => {
-  // const { length, breadth, height, volume } = req.body;
-  let length = 10,
-    breadth = 10,
-    height = 10,
-    volume = 10;
+  const { length, breadth, height, volume } = req.body;
+  // let length = 10,
+  //   breadth = 10,
+  //   height = 10,
+  //   volume = 10;
 
   if (
     typeof length !== "number" ||
