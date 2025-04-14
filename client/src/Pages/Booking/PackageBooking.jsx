@@ -106,7 +106,7 @@ const fetchArduinoData = async () => {
           type="button"
           className="mb-6 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
         >
-          Fetch Dimensions from Arduino
+          Fetch Dimensions from Device
         </button>
 
         <form onSubmit={formik.handleSubmit} className="space-y-6">
