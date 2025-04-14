@@ -236,7 +236,7 @@ const fetchArduinoData = async () => {
                 : "bg-blue-600 hover:bg-blue-700"
             }`}
           >
-            {loading ? "Fetching Pricing..." : "Book Package"}
+            {loading ? "Fetching Pricing..." : "Get Estimated Price"}
           </button>
         </form>
       </div>
