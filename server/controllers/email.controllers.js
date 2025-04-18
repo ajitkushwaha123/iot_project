@@ -127,3 +127,36 @@ export const resetPasswordEmail = tryCatch(async (req, res) => {
 
   res.status(200).json(result);
 });
+
+export const sendOrderSuccessEmail = async ({ username, email }) => {
+  console.log("em", email);
+  const subject =
+    "🎉 Hooray! Your order has been created and is ready to be shipped! 🚚📦";
+
+  // Validate the email format
+  const validEmail = checkEmailFormat(email);
+  if (!validEmail.success) {
+    throw new Error(validEmail.msg); // Throw an error to handle it outside
+  }
+
+  const emailData = {
+    userName: username,
+    userEmail: email,
+    verificationCode: "1234", // You might want to dynamically generate this code
+  };
+
+  try {
+    const result = await sendEmail({
+      to: email,
+      subject,
+      templateName: "registration-success",
+      templateData: emailData,
+    });
+
+    console.log("Email sent:", result);
+    return result; // Returning the result of the email send operation
+  } catch (err) {
+    console.error("Email sending failed:", err.message);
+    throw new Error("Email sending failed");
+  }
+};

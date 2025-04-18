@@ -1,10 +1,11 @@
 import express from "express";
 import axios from "axios";
+import { sendOrderSuccessEmail } from "../controllers/email.controllers.js";
 
 const courier = express.Router();
 
 const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjYyMzE4NzUsInNvdXJjZSI6InNyLWF1dGgtaW50IiwiZXhwIjoxNzQ0ODI4ODAxLCJqdGkiOiJsVExXMVpyd2hRSlY1WHJUIiwiaWF0IjoxNzQzOTY0ODAxLCJpc3MiOiJodHRwczovL3NyLWF1dGguc2hpcHJvY2tldC5pbi9hdXRob3JpemUvdXNlciIsIm5iZiI6MTc0Mzk2NDgwMSwiY2lkIjo2MDE1MTkxLCJ0YyI6MzYwLCJ2ZXJib3NlIjpmYWxzZSwidmVuZG9yX2lkIjowLCJ2ZW5kb3JfY29kZSI6IiJ9.Z6_1nEqblhQJ8t4RKjT1xS0yZpA1iiQviiXOa0y6hYk";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjYyMzE4NzUsInNvdXJjZSI6InNyLWF1dGgtaW50IiwiZXhwIjoxNzQ1NzM3NDk2LCJqdGkiOiI3UU1yN1NXaEpQSXV0em1zIiwiaWF0IjoxNzQ0ODczNDk2LCJpc3MiOiJodHRwczovL3NyLWF1dGguc2hpcHJvY2tldC5pbi9hdXRob3JpemUvdXNlciIsIm5iZiI6MTc0NDg3MzQ5NiwiY2lkIjo2MDE1MTkxLCJ0YyI6MzYwLCJ2ZXJib3NlIjpmYWxzZSwidmVuZG9yX2lkIjowLCJ2ZW5kb3JfY29kZSI6IiJ9.gxega0q4UbXE_X_4LbvCoSsUJLdF59w3VJbZhz1wo78";
 
 courier.get("/all", async (req, res) => {
   try {
@@ -66,7 +67,12 @@ courier.get("/get-pricing", async (req, res) => {
 });
 
 courier.post("/create-order", async (req, res) => {
-  const data = req.body;
+  const email = req.body.billing_email;
+  const username = "ajit12345";
+
+  const data = req.body; 
+
+  console.log("data", data);
 
   try {
     const result = await axios.post(
@@ -74,16 +80,22 @@ courier.post("/create-order", async (req, res) => {
       data,
       {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`, 
         },
       }
     );
 
     console.log("Shiprocket API response:", result.data);
 
+    try {
+      await sendOrderSuccessEmail({ username, email });
+    } catch (e) {
+      console.error("Email sending failed:", e.message);
+    }
+
     return res.status(200).json({
       success: true,
-      msg: "Order Created Successfully!",
+      msg: "🎉 Hooray! Your order has been created and is ready to be shipped! 🚚📦",
       data: result.data,
     });
   } catch (err) {
@@ -94,6 +106,7 @@ courier.post("/create-order", async (req, res) => {
     });
   }
 });
+
 
 courier.get("/all-orders", async (req, res) => {
   try {
@@ -155,6 +168,5 @@ courier.post("/cancel-order/:id", async (req, res) => {
     });
   }
 });
-
 
 export default courier;

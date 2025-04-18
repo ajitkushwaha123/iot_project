@@ -9,17 +9,25 @@ dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// const transporter = nodemailer.createTransport({
+//   host: "smtp.ethereal.email",
+//   port: 587,
+//   // secure: true,
+//   auth: {
+//     user: process.env.EMAIL,
+//     pass: process.env.PASSWORD,
+//   },
+//   // tls: {
+//   //   rejectUnauthorized: false,
+//   // },
+// });
+
 const transporter = nodemailer.createTransport({
-  host: "smtp.ethereal.email",
-  port: 587,
-  // secure: true,
+  service: "gmail",
   auth: {
-    user: process.env.EMAIL,
-    pass: process.env.PASSWORD,
+    user: "mycodingprofiles@gmail.com",
+    pass: "omjh rauc yurg inga",
   },
-  // tls: {
-  //   rejectUnauthorized: false,
-  // },
 });
 
 export const sendEmail = async ({
