@@ -1,11 +1,5 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import Register from "./Auth/Register/Register";
-import AuthLayout from "./Auth/AuthLayout";
-import LoginWithPassword from "./Auth/Login/LoginWithPassword";
-import ForgetPassword from "./Auth/ForgetPassword/ForgetPassword";
-import Profile from "./Auth/Profile/Profile";
-import Home from "./Home/Home";
 import DashboardLayout from "./Home/DashboardLayout";
 import PackageBooking from "./Pages/Booking/PackageBooking";
 import AutoMeasurement from "./Pages/Booking/AutoMeasurement";
@@ -16,7 +10,6 @@ import DeliveryPartners from "./Pages/Booking/DeliveryPartners/DeliveryPartners"
 import AllOrders from "./Pages/Order/AllOrders";
 import CreateOrder from "./Pages/Order/CreateOrder";
 import Hero from "./Home/Hero";
-import Header from "./components/reuseableComponents/Header";
 import HomeLayout from "./Home/HomeLayout";
 
 function App() {
