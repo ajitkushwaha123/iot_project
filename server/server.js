@@ -1,7 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-import user from "./routes/user.routes.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import courier from "./routes/courier.route.js";
@@ -58,7 +57,6 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
-app.use("/api/user", user);
 app.use("/api/courier", courier);
 app.use("/api/arduino", arduino);
 

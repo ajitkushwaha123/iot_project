@@ -43,15 +43,6 @@ const Sidebar = () => {
         { name: "Cancelled Order", path: "/order/all-orders?cancelled=true" },
       ],
     },
-    {
-      name: "Pickup",
-      icon: <Package className="w-5 h-5" />,
-      subItems: [
-        { name: "Create Pickup", path: "/pickup/create" },
-        { name: "Pickup History", path: "/pickup/history" },
-        { name: "Pickup Tracking", path: "/pickup/tracking" },
-      ],
-    },
     // {
     //   name: "Billing",
     //   icon: <CreditCard className="w-5 h-5" />,
@@ -63,14 +54,7 @@ const Sidebar = () => {
     {
       name: "Delivery Partners",
       icon: <Truck className="w-5 h-5" />,
-      subItems: [
-        { name: "Manage Partners", path: "/partners/manage" },
-      ],
-    },
-    {
-      name: "Profile",
-      icon: <User className="w-5 h-5" />,
-      path: "/profile",
+      subItems: [{ name: "Manage Partners", path: "/partners/manage" }],
     },
     // {
     //   name: "Settings",

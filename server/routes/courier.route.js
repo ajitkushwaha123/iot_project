@@ -1,7 +1,5 @@
 import express from "express";
 import axios from "axios";
-import { sendOrderSuccessEmail } from "../controllers/email.controllers.js";
-
 const courier = express.Router();
 
 const token =
@@ -70,7 +68,7 @@ courier.post("/create-order", async (req, res) => {
   const email = req.body.billing_email;
   const username = "ajit12345";
 
-  const data = req.body; 
+  const data = req.body;
 
   console.log("data", data);
 
@@ -80,18 +78,12 @@ courier.post("/create-order", async (req, res) => {
       data,
       {
         headers: {
-          Authorization: `Bearer ${token}`, 
+          Authorization: `Bearer ${token}`,
         },
       }
     );
 
     console.log("Shiprocket API response:", result.data);
-
-    try {
-      await sendOrderSuccessEmail({ username, email });
-    } catch (e) {
-      console.error("Email sending failed:", e.message);
-    }
 
     return res.status(200).json({
       success: true,
@@ -106,7 +98,6 @@ courier.post("/create-order", async (req, res) => {
     });
   }
 });
-
 
 courier.get("/all-orders", async (req, res) => {
   try {
